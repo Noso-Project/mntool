@@ -1,5 +1,4 @@
-# Nosolite
-
+# mntool
 [![Build Status](https://github.com/DevTeamNoso/NosoLite/workflows/Build%20NosoLite/badge.svg?branch=main)](https://github.com/DevTeamNoso/NosoLite/actions)
 [![Supports Windows](https://img.shields.io/badge/support-Windows-blue?logo=Windows)](https://github.com/DevTeamNoso/mntool/releases/latest)
 [![Supprts Linux](https://img.shields.io/badge/support-Linux-yellow?logo=Linux)](https://github.com/DevTeamNoso/mntool/releases/latest)
