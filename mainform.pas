@@ -259,6 +259,7 @@ var
   CurrRow    : integer;
   ThisUptime : integer;
   TotalUptime: integer = 0;
+  AvgUptime  : integer = 0;
 Begin
 CurrRow := Form1.StringGrid1.Row;
 Form1.StringGrid1.RowCount:=1;
@@ -285,7 +286,8 @@ if empty = 0 then Form1.StringGrid1.Cells[0,0] := format('Addresses (%d)',[lengt
 else Form1.StringGrid1.Cells[0,0] := format('Addresses (%d) - %d offline',[length(ArrAddresses), empty]);
 form1.GridData.Cells[0,0]:='Block: '+LastValidBlock.ToString;
 form1.GridData.Cells[0,1]:=Format('Nodes: %d (%d)',[length(ArrMNs),TotalVerifics]);
-form1.GridData.Cells[1,0]:=Format('Avg. uptime : %d %%',[TotalUptime div length(ArrAddresses)]);
+if length(ArrAddresses)> 0 then AvgUptime:= TotalUptime div length(ArrAddresses);
+form1.GridData.Cells[1,0]:=Format('Avg. uptime : %d %%',[AvgUptime]);
 Form1.StringGrid1.Row := CurrRow;
 End;
 
