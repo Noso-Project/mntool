@@ -104,6 +104,7 @@ if FirstShow then
    GridDataResize(nil);
    UpdateGrid();
    ClockTimer.Enabled:=true;
+   form1.Caption:='MnTool '+AppVersion;
    end;
 End;
 

@@ -38,6 +38,7 @@ CONST
                       '107.174.137.27;8080:N46PiNk7chSURJJZoMSRdwsDh8FAbDa:114';
   LastMNFilename = 'data'+directoryseparator+'last.txt';
   MyAddressesFilename = 'data'+directoryseparator+'addresses.dat';
+  AppVersion = '1.0';
 
 Function Parameter(LineText:String;ParamNumber:int64):String;
 Procedure CreateTextFile(name:string);
