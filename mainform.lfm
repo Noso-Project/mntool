@@ -1,0 +1,114 @@
+object Form1: TForm1
+  Left = 542
+  Height = 400
+  Top = 292
+  Width = 600
+  Caption = 'Noso MN tool'
+  ClientHeight = 400
+  ClientWidth = 600
+  Constraints.MinHeight = 400
+  Constraints.MinWidth = 600
+  OnCreate = FormCreate
+  OnShow = FormShow
+  LCLVersion = '2.0.10.0'
+  object PageControl1: TPageControl
+    Left = 0
+    Height = 400
+    Top = 0
+    Width = 600
+    ActivePage = TabSheet1
+    Align = alClient
+    Font.CharSet = ANSI_CHARSET
+    Font.Color = clBlack
+    Font.Height = -12
+    Font.Name = 'Segoe UI'
+    Font.Pitch = fpVariable
+    Font.Quality = fqDraft
+    ParentFont = False
+    TabIndex = 0
+    TabOrder = 0
+    object TabSheet1: TTabSheet
+      Caption = 'Addresses'
+      ClientHeight = 372
+      ClientWidth = 592
+      Font.CharSet = ANSI_CHARSET
+      Font.Color = clBlack
+      Font.Height = -12
+      Font.Name = 'Segoe UI'
+      Font.Pitch = fpVariable
+      Font.Quality = fqDraft
+      ParentFont = False
+      object StringGrid1: TStringGrid
+        Left = 0
+        Height = 304
+        Top = 0
+        Width = 592
+        Align = alClient
+        ColCount = 4
+        FixedCols = 0
+        Font.CharSet = ANSI_CHARSET
+        Font.Color = clBlack
+        Font.Height = -12
+        Font.Name = 'Consolas'
+        Font.Pitch = fpFixed
+        Font.Quality = fqDraft
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRowSelect, goSmoothScroll]
+        ParentFont = False
+        PopupMenu = PopupGrid
+        RowCount = 1
+        ScrollBars = ssVertical
+        TabOrder = 0
+        OnKeyUp = StringGrid1KeyUp
+        OnResize = StringGrid1Resize
+      end
+      object Panel1: TPanel
+        Left = 0
+        Height = 68
+        Top = 304
+        Width = 592
+        Align = alBottom
+        ClientHeight = 68
+        ClientWidth = 592
+        Color = clMenu
+        ParentColor = False
+        TabOrder = 1
+        object GridData: TStringGrid
+          Left = 1
+          Height = 66
+          Top = 1
+          Width = 590
+          Align = alClient
+          ColCount = 2
+          DefaultRowHeight = 20
+          FixedCols = 0
+          FixedRows = 0
+          Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goSmoothScroll]
+          RowCount = 3
+          ScrollBars = ssNone
+          TabOrder = 0
+          OnResize = GridDataResize
+        end
+      end
+    end
+  end
+  object PopupGrid: TPopupMenu
+    Left = 136
+    Top = 345
+    object MenuItem3: TMenuItem
+      Caption = 'New'
+      OnClick = MenuItem3Click
+    end
+    object MenuItem1: TMenuItem
+      Caption = 'Delete'
+      OnClick = MenuItem1Click
+    end
+    object MenuItem2: TMenuItem
+      Caption = 'Label'
+      OnClick = MenuItem2Click
+    end
+    object MenuItem4: TMenuItem
+      Caption = 'Reset'
+      OnClick = MenuItem4Click
+    end
+  end
+end
