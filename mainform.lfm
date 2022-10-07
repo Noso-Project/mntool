@@ -59,6 +59,7 @@ object Form1: TForm1
         ScrollBars = ssVertical
         TabOrder = 0
         OnKeyUp = StringGrid1KeyUp
+        OnPrepareCanvas = StringGrid1PrepareCanvas
         OnResize = StringGrid1Resize
       end
       object Panel1: TPanel

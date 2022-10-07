@@ -34,6 +34,8 @@ type
     procedure MenuItem3Click(Sender: TObject);
     procedure StringGrid1KeyUp(Sender: TObject; var Key: Word;
       Shift: TShiftState);
+    procedure StringGrid1PrepareCanvas(sender: TObject; aCol, aRow: Integer;
+      aState: TGridDrawState);
     procedure StringGrid1Resize(Sender: TObject);
     Procedure ClockTimerEjecutar(Sender: TObject);
   private
@@ -224,7 +226,19 @@ if InputQuery('Edit label', 'Enter label', newlabel) then
    end;
 End;
 
-// Button to update
+// Popup reset
+procedure TForm1.MenuItem4Click(Sender: TObject);
+Begin
+if stringgrid1.Row>0 then
+   begin
+   ArrAddresses[stringgrid1.Row-1].Bad := 0;
+   ArrAddresses[stringgrid1.Row-1].good := 0;
+   SaveMyAddresses();
+   UpdateGrid();
+   end;
+End;
+
+// Run update
 procedure TForm1.RunUpdate(firstTime:boolean = false);
 Begin
 if GetMainnetMasternodes then
@@ -239,18 +253,6 @@ else
    end;
 End;
 
-// Popup reset
-procedure TForm1.MenuItem4Click(Sender: TObject);
-Begin
-if stringgrid1.Row>0 then
-   begin
-   ArrAddresses[stringgrid1.Row-1].Bad := 0;
-   ArrAddresses[stringgrid1.Row-1].good := 0;
-   SaveMyAddresses();
-   UpdateGrid();
-   end;
-End;
-
 // Updates the screen
 Procedure UpdateGrid(newblock:boolean = false);
 var
@@ -258,12 +260,12 @@ var
   TValue     : integer;
   empty      : integer = 0;
   CurrRow    : integer;
-  ThisUptime : integer;
-  TotalUptime: integer = 0;
-  AvgUptime  : integer = 0;
+  ThisUptime : extended;
+  TotalUptime: extended = 0;
+  AvgUptime  : extended = 0.0;
 Begin
 CurrRow := Form1.StringGrid1.Row;
-Form1.StringGrid1.RowCount:=1;
+Form1.StringGrid1.RowCount:=length(ArrAddresses)+1;
 form1.StringGrid1.Cells[0,0] := Format('Addresses (%d)',[length(ArrAddresses)]);
 for counter := 0 to length(ArrAddresses)-1 do
    begin
@@ -274,12 +276,11 @@ for counter := 0 to length(ArrAddresses)-1 do
       if TValue = 0 then Inc(ArrAddresses[counter].Bad)
       else Inc(ArrAddresses[counter].good);
       end;
-   form1.StringGrid1.RowCount := form1.StringGrid1.RowCount+1;
    Form1.StringGrid1.Cells[0,counter+1] := ArrAddresses[counter].address;
    Form1.StringGrid1.Cells[1,counter+1] := ArrAddresses[counter].ALabel;
    ThisUptime := GetAddressUptimeValue(counter);
    TotalUptime := TotalUptime + ThisUptime;
-   Form1.StringGrid1.Cells[2,counter+1] := Format('%d %% (%d)',[ThisUptime,ArrAddresses[counter].Bad+ArrAddresses[counter].good]);
+   Form1.StringGrid1.Cells[2,counter+1] := Format('%s %%',[FormatFloat('0.00',ThisUptime)]);
    Form1.StringGrid1.Cells[3,counter+1] := TValue.ToString;
    end;
 if newblock then SaveMyAddresses;
@@ -287,8 +288,8 @@ if empty = 0 then Form1.StringGrid1.Cells[0,0] := format('Addresses (%d)',[lengt
 else Form1.StringGrid1.Cells[0,0] := format('Addresses (%d) - %d offline',[length(ArrAddresses), empty]);
 form1.GridData.Cells[0,0]:='Block: '+LastValidBlock.ToString;
 form1.GridData.Cells[0,1]:=Format('Nodes: %d (%d)',[length(ArrMNs),TotalVerifics]);
-if length(ArrAddresses)> 0 then AvgUptime:= TotalUptime div length(ArrAddresses);
-form1.GridData.Cells[1,0]:=Format('Avg. uptime : %d %%',[AvgUptime]);
+if length(ArrAddresses)> 0 then AvgUptime:= TotalUptime / length(ArrAddresses);
+form1.GridData.Cells[1,0]:=Format('Avg. uptime : %s %%',[FormatFloat('0.00',AvgUptime)]);
 Form1.StringGrid1.Row := CurrRow;
 End;
 
@@ -299,8 +300,38 @@ begin
 GridWidth := StringGrid1.Width;
 StringGrid1.ColWidths[0]:= thispercent(40,GridWidth);
 StringGrid1.ColWidths[1]:= thispercent(30,GridWidth);
-StringGrid1.ColWidths[2]:= thispercent(15,GridWidth);
-StringGrid1.ColWidths[3]:= thispercent(15,GridWidth,true);
+StringGrid1.ColWidths[2]:= thispercent(12,GridWidth);
+StringGrid1.ColWidths[3]:= thispercent(18,GridWidth,true);
+End;
+
+// Grid addresses prepare canvas
+procedure TForm1.StringGrid1PrepareCanvas(sender: TObject; aCol, aRow: Integer;
+  aState: TGridDrawState);
+var
+  ts: TTextStyle;
+Begin
+if (ARow=0)  then
+   begin
+   ts := (Sender as TStringGrid).Canvas.TextStyle;
+   ts.Alignment := taCenter;
+   (Sender as TStringGrid).Canvas.TextStyle := ts;
+   end
+else
+   begin
+   if ACol>1 then
+      begin
+      ts := (Sender as TStringGrid).Canvas.TextStyle;
+      ts.Alignment := taRightJustify;
+      (Sender as TStringGrid).Canvas.TextStyle := ts;
+      end;
+   if ACol = 0 then
+      begin
+      if GetAddressAge(ArrAddresses[Arow-1].address) = 0 then
+         (Sender as TStringGrid).Canvas.Brush.Color:=clRed
+      else
+         (Sender as TStringGrid).Canvas.brush.Color:=clGreen;
+      end;
+   end;
 End;
 
 procedure TForm1.GridDataResize(Sender: TObject);

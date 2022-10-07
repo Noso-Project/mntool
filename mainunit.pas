@@ -38,7 +38,7 @@ CONST
                       '107.174.137.27;8080:N46PiNk7chSURJJZoMSRdwsDh8FAbDa:114';
   LastMNFilename = 'data'+directoryseparator+'last.txt';
   MyAddressesFilename = 'data'+directoryseparator+'addresses.dat';
-  AppVersion = '1.1';
+  AppVersion = '1.2';
 
 Function Parameter(LineText:String;ParamNumber:int64):String;
 Procedure CreateTextFile(name:string);
@@ -48,7 +48,7 @@ Procedure LoadMyAddresses();
 Procedure SaveMyAddresses();
 Procedure FillMNsArray();
 Procedure FillVerificators();
-Function GetAddressUptimeValue(Number:integer):integer;
+Function GetAddressUptimeValue(Number:integer):extended;
 function GetMainnetMasternodes(Trys:integer=5):boolean;
 function GetMainnetTimestamp(Trys:integer=5):int64;
 function GetMyLastUpdatedBlock():integer;
@@ -256,13 +256,13 @@ Delete(ArrVers,TotalVerifics,Length(ArrVers));
 TotalVerifics := length(ArrVers);
 End;
 
-Function GetAddressUptimeValue(Number:integer):integer;
+Function GetAddressUptimeValue(Number:integer):extended;
 var
   TTotal : integer;
 Begin
-result := 0;
+result := 0.0;
 TTotal := ArrAddresses[number].Good+ArrAddresses[number].Bad;
-if TTotal > 0 then result := (ArrAddresses[number].Good*100) div TTotal;
+if TTotal > 0 then result := (ArrAddresses[number].Good*100) / TTotal;
 
 End;
 
@@ -275,9 +275,9 @@ var
   BlckNmb    : integer;
 Begin
 Result := false;
+Client := TidTCPClient.Create(nil);
 REPEAT
    RanNode := Random(length(ArrVers));
-   Client := TidTCPClient.Create(nil);
    Client.Host:=ArrVers[RanNode].ip;
    Client.Port:=ArrVers[RanNode].port;
    Client.ConnectTimeout:= 3000;
@@ -322,9 +322,9 @@ var
   WasDone : boolean = false;
 Begin
 Result := 0;
+Client := TidTCPClient.Create(nil);
 REPEAT
    RanNode := Random(length(ArrVers));
-   Client := TidTCPClient.Create(nil);
    Client.Host:=ArrVers[RanNode].ip;
    Client.Port:=ArrVers[RanNode].port;
    Client.ConnectTimeout:= 3000;

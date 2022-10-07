@@ -1,3 +1,10 @@
+Version 1.2
+
+- Adjusted grid update function.
+- Improved addresses grid output.
+- Float Avg uptime.
+- Fixed bug creating multiple TCP clients.
+
 Version 1.1
 
 - Cthreads fixed for linux.
