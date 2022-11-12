@@ -28,16 +28,16 @@
       <Unit2>
         <Filename Value="mainunit.pas"/>
         <IsPartOfProject Value="True"/>
+        <IsVisibleTab Value="True"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="323"/>
-        <CursorPos X="22" Y="407"/>
+        <TopLine Value="311"/>
+        <CursorPos X="38" Y="332"/>
         <UsageCount Value="43"/>
         <Loaded Value="True"/>
       </Unit2>
       <Unit3>
         <Filename Value="changelog.txt"/>
         <IsPartOfProject Value="True"/>
-        <IsVisibleTab Value="True"/>
         <EditorIndex Value="3"/>
         <CursorPos X="22" Y="7"/>
         <UsageCount Value="26"/>
