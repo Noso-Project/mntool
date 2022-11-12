@@ -4,6 +4,7 @@ Version 1.2
 - Improved addresses grid output.
 - Float Avg uptime.
 - Fixed bug creating multiple TCP clients.
+- Updated new dev pc.
 
 Version 1.1
 
