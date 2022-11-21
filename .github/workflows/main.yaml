@@ -29,8 +29,9 @@ jobs:
     - name: Install Lazarus
       uses: gcarreno/setup-lazarus@v3.2
       with:
+        with:
         lazarus-version: ${{ matrix.lazarus-versions }}
-        with-cache: false
+        include-packages: "Indy10"
 
      - name: Patch Indy10
       run: |
