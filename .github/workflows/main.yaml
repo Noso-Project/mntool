@@ -29,11 +29,11 @@ jobs:
     - name: Install Lazarus
       uses: gcarreno/setup-lazarus@v3.2
       with:
-        with:
         lazarus-version: ${{ matrix.lazarus-versions }}
         include-packages: "Indy10"
+        with-cache: false
 
-     - name: Patch Indy10
+    - name: Patch Indy10
       run: |
         for folder in Core FCL Protocols SuperCore System
         do
