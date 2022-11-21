@@ -32,10 +32,12 @@ jobs:
         lazarus-version: ${{ matrix.lazarus-versions }}
         with-cache: false
 
-    - name: Unzip packages
-      run: unzip -q Packages/\*.zip -d Packages
-    - name: Install packages
-      run: lazbuild -qqq Packages/Indy10/indylaz.lpk
+     - name: Patch Indy10
+      run: |
+        for folder in Core FCL Protocols SuperCore System
+        do
+          patch "${folder}/IdCompilerDefines.inc" "indyfix/IdCompilerDefines.patch"
+        done
 
     - name: Build the Main App (Windows)
       if: ${{ matrix.operating-system == 'windows-latest' }}
