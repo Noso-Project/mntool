@@ -1,0 +1,20 @@
+--- IdCompilerDefines.inc	2021-09-24 06:17:26.000000000 +0100
++++ IdCompilerDefines.inc.fix	2022-11-21 21:27:40.670219099 +0000
+@@ -36,8 +36,8 @@
+ 
+ // $DEFINE the following if the global objects in the IdStack and IdThread
+ // units should be freed on finalization
+-{.$DEFINE FREE_ON_FINAL}
+-{$UNDEF FREE_ON_FINAL}
++{$DEFINE FREE_ON_FINAL}
++{.$UNDEF FREE_ON_FINAL}
+ 
+ // Make sure the following is $DEFINE'd only for suitable environments
+ // as specified further below.  This works in conjunction with the
+@@ -2013,4 +2013,4 @@
+ // indexing for now...
+ {$IFDEF HAS_DIRECTIVE_ZEROBASEDSTRINGS}
+   {$ZEROBASEDSTRINGS OFF}
+-{$ENDIF}
+\ No newline at end of file
++{$ENDIF}
