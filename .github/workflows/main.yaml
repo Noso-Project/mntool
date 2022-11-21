@@ -40,41 +40,41 @@ jobs:
     - name: Build the Main App (Windows)
       if: ${{ matrix.operating-system == 'windows-latest' }}
       run: |
-        lazbuild -B --bm=Release "consominer2.lpi"
-        mv consominer2.exe consominer2-x86_64-win64.exe
+        lazbuild -B --bm=Release "mntool.lpi"
+        mv mntool.exe mntool-x86_64-win64.exe
 
     - name: Build the Main App (Ubuntu)
       if: ${{ matrix.operating-system == 'ubuntu-latest' }}
       run: |
-        lazbuild -B --bm=Release "consominer2.lpi"
-        mv consominer2 consominer2-x86_64-linux
+        lazbuild -B --bm=Release "mntool.lpi"
+        mv mntool mntool-x86_64-linux
 
     - name: Build the Main App (macOS)
       if: ${{ matrix.operating-system == 'macos-latest' }}
       run: |
-        lazbuild -B --bm=Release "consominer2.lpi"
-        mv consominer2 consominer2-x86_64-darwin
+        lazbuild -B --bm=Release "mntool.lpi"
+        mv mntool mntool-x86_64-darwin
 
     - name: Upload binary (Windows)
       if: ${{ (matrix.operating-system == 'windows-latest')  &&  (matrix.lazarus-versions == 'stable') }}
       uses: actions/upload-artifact@v2
       with:
-        name: consominer2
-        path: consominer2-x86_64-win64.exe
+        name: mntool
+        path: mntool-x86_64-win64.exe
 
     - name: Upload binary (Ubuntu)
       if: ${{ (matrix.operating-system == 'ubuntu-latest')  &&  (matrix.lazarus-versions == 'stable') }}
       uses: actions/upload-artifact@v2
       with:
-        name: consominer2
-        path: consominer2-x86_64-linux
+        name: mntool
+        path: mntool-x86_64-linux
 
     - name: Upload binary (macOS)
       if: ${{ (matrix.operating-system == 'macos-latest')  &&  (matrix.lazarus-versions == 'stable') }}
       uses: actions/upload-artifact@v2
       with:
-        name: consominer2
-        path: consominer2-x86_64-darwin
+        name: mntool
+        path: mntool-x86_64-darwin
 
   package-release:
     if: contains(github.ref, '/tags/')
@@ -95,23 +95,23 @@ jobs:
       uses: actions/download-artifact@v2
 
     - name: List files
-      run: ls -alF consominer2
+      run: ls -alF mntool
 
     - name: Create release files
       run: |
-        cd consominer2
-        chmod +x consominer2-x86_64-linux consominer2-x86_64-darwin
-        zip -r consominer2-${{ steps.vars.outputs.tag }}-x86_64-win64.zip consominer2-x86_64-win64.exe
-        tar -zcvf consominer2-${{ steps.vars.outputs.tag }}-x86_64-linux.tar.gz consominer2-x86_64-linux
-        tar -zcvf consominer2-${{ steps.vars.outputs.tag }}-x86_64-darwin.tar.gz consominer2-x86_64-darwin
+        cd mntool
+        chmod +x mntool-x86_64-linux mntool-x86_64-darwin
+        zip -r mntool-${{ steps.vars.outputs.tag }}-x86_64-win64.zip mntool-x86_64-win64.exe
+        tar -zcvf mntool-${{ steps.vars.outputs.tag }}-x86_64-linux.tar.gz mntool-x86_64-linux
+        tar -zcvf mntool-${{ steps.vars.outputs.tag }}-x86_64-darwin.tar.gz mntool-x86_64-darwin
 
     - name: Create GitHub release
       uses: softprops/action-gh-release@v1
       with:
-        name: consominer2 ${{ steps.vars.outputs.tag }}
+        name: mntool ${{ steps.vars.outputs.tag }}
         body_path: releasenotes.txt
         files: |
-          consominer2/*.tar.gz
-          consominer2/*.zip
+          mntool/*.tar.gz
+          mntool/*.zip
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
