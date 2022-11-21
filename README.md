@@ -2,6 +2,7 @@
 [![Build Status](https://github.com/DevTeamNoso/mntool/workflows/Build%20mntool/badge.svg?branch=main)](https://github.com/DevTeamNoso/mntool/actions)
 [![Supports Windows](https://img.shields.io/badge/support-Windows-blue?logo=Windows)](https://github.com/DevTeamNoso/mntool/releases/latest)
 [![Supprts Linux](https://img.shields.io/badge/support-Linux-yellow?logo=Linux)](https://github.com/DevTeamNoso/mntool/releases/latest)
+[![Supports macOS](https://img.shields.io/badge/support-macOS-black?logo=macOS)](https://github.com/Noso-Project/consominer2/releases/latest)
 [![License](https://img.shields.io/github/license/DevTeamNoso/mntool)](https://github.com/DevTeamNoso/mntool/blob/master/LICENSE)
 [![Latest Release](https://img.shields.io/github/v/release/DevTeamNoso/mntool?label=latest%20release)](https://github.com/DevTeamNoso/mntool/releases/latest)
 [![Downloads](https://img.shields.io/github/downloads/DevTeamNoso/mntool/total)](https://github.com/DevTeamNoso/mntool/releases)
@@ -42,8 +43,6 @@ The Linux version has been tested on:
 
 ## Donations
 
-BTC: 3H1VzdL3QFQpc62DUhbtCFV5dG4K1yPwVB
+Donate to project sending Noso to the address:
 
-LTC: LUUWwzfeQtJ4dc8A5xJVz3Zacray55f1WH
-
-NosoCoin: devteam_donations
+### NpryectdevepmentfundsGE
